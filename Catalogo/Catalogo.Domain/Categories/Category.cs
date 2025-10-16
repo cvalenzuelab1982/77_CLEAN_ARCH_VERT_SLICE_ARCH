@@ -8,6 +8,11 @@ namespace Catalogo.Domain.Categories
         
         public string? Name { get; private set; }
 
+        private Category()
+        {
+
+        }
+
         private Category(Guid id, string name) : base(id)
         {
             Name = name;
