@@ -7,10 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Bogus" Version="35.6.4" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -19,10 +17,28 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Catalogo.Infrastructure\Catalogo.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\img_1.jpg" />
+    <None Include="wwwroot\Images\img_10.jpg" />
+    <None Include="wwwroot\Images\img_2.jpg" />
+    <None Include="wwwroot\Images\img_3.jpg" />
+    <None Include="wwwroot\Images\img_4.jpg" />
+    <None Include="wwwroot\Images\img_5.jpg" />
+    <None Include="wwwroot\Images\img_6.jpg" />
+    <None Include="wwwroot\Images\img_7.jpg" />
+    <None Include="wwwroot\Images\img_8.jpg" />
+    <None Include="wwwroot\Images\img_9.jpg" />
   </ItemGroup>
 
 </Project>

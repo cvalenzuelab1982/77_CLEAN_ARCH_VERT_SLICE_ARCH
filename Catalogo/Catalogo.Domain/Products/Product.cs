@@ -1,5 +1,6 @@
 ﻿using Catalogo.Domain.Abstractions;
 using Catalogo.Domain.Products.Events;
+using System.Text.RegularExpressions;
 
 namespace Catalogo.Domain.Products
 {
@@ -29,7 +30,23 @@ namespace Catalogo.Domain.Products
 
         public static Product Create(string name, decimal price, string descripcion, string imageUrl, string code, Guid categoryId)
         {
-            var product = new Product(Guid.NewGuid(), name, price, descripcion, imageUrl, code, categoryId);
+            var id = Guid.NewGuid();
+
+            if (string.IsNullOrEmpty(code))
+            {
+                code = Regex.Replace(Convert.ToBase64String(id.ToByteArray()), "[/+=]", "");
+            }
+
+            var product = new Product(
+                id, 
+                name, 
+                price, 
+                descripcion, 
+                imageUrl, 
+                code, 
+                categoryId
+            );
+
             var productDomainEvent = new ProductCreatedDomainEvent(product.Id);
             product.RaiseDomainEvents(productDomainEvent);  
             return product;

@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Catalogo.Domain.Abstractions;
+using Catalogo.Domain.Products;
+using Catalogo.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -17,6 +20,10 @@ namespace Catalogo.Infrastructure
                 }, LogLevel.Information).EnableSensitiveDataLogging();
                 opt.UseSqlServer(configuration.GetConnectionString("CatalogoConnectionString")).UseSnakeCaseNamingConvention();
             });
+
+            services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<CatalogoDbContext>());
+            services.AddScoped<IProductRepository, ProductRepository>();
+
             return services;
         }
     }
