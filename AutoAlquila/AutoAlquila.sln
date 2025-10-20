@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoAlquila.Domain", "AutoAlquila.Domain\AutoAlquila.Domain.csproj", "{3CBE49B4-AD1B-41EA-A6E7-DDF8EB2AB12D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CBE49B4-AD1B-41EA-A6E7-DDF8EB2AB12D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CBE49B4-AD1B-41EA-A6E7-DDF8EB2AB12D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CBE49B4-AD1B-41EA-A6E7-DDF8EB2AB12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CBE49B4-AD1B-41EA-A6E7-DDF8EB2AB12D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E4EB8D3-8D99-4744-B8C6-341CDB2D85BE}
+	EndGlobalSection
+EndGlobal
