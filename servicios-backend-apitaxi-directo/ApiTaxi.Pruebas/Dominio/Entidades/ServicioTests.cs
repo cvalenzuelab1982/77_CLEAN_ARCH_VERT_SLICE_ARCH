@@ -1,6 +1,5 @@
 ﻿using ApiTaxi.Dominio.Entidades;
 using ApiTaxi.Dominio.ObjetoValor;
-using System.ComponentModel.DataAnnotations;
 
 namespace ApiTaxi.Pruebas.Dominio.Entidades
 {

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ApiTaxi.Aplicacion.Contratos.Repositorios
+﻿namespace ApiTaxi.Aplicacion.Contratos.Repositorios
 {
     public interface IRepositorio<T> where T : class
     {
         Task<T> Agregar(T entidad);
+        Task Actualizar(T entidad);
+        Task Borrar(T entidad);
+        Task<T?> ObtenerPorId(int id);
+        Task<IEnumerable<T>> Obtenertodos();
     }
 }

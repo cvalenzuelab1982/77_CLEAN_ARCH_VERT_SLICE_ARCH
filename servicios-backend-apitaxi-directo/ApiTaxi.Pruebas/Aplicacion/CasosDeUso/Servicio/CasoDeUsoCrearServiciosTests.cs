@@ -4,8 +4,6 @@ using ApiTaxi.Aplicacion.Contratos.Persistencia;
 using ApiTaxi.Aplicacion.Contratos.Repositorios;
 using ApiTaxi.Dominio.Entidades;
 using ApiTaxi.Dominio.ObjetoValor;
-using FluentValidation;
-using FluentValidation.Results;
 using NSubstitute;
 
 namespace ApiTaxi.Pruebas.Aplicacion.CasosDeUso.Servicio
@@ -14,7 +12,6 @@ namespace ApiTaxi.Pruebas.Aplicacion.CasosDeUso.Servicio
     public class CasoDeUsoCrearServiciosTests
     {
         private IRepositorioServicios repositorio;
-        private IValidator<CmdCrearServicio> validator;
         private IUnitOfWork unitOfWork;
         private CasoDeUsoCrearServicio casoDeUso;
 
@@ -22,9 +19,8 @@ namespace ApiTaxi.Pruebas.Aplicacion.CasosDeUso.Servicio
         public void Setup()
         {
             repositorio = Substitute.For<IRepositorioServicios>();
-            validator = Substitute.For<IValidator<CmdCrearServicio>>();
             unitOfWork = Substitute.For<IUnitOfWork>();
-            casoDeUso = new CasoDeUsoCrearServicio(repositorio, unitOfWork, validator);
+            casoDeUso = new CasoDeUsoCrearServicio(repositorio, unitOfWork);
         }
 
         [TestMethod]
@@ -38,7 +34,7 @@ namespace ApiTaxi.Pruebas.Aplicacion.CasosDeUso.Servicio
                 CodigoCentrocosto = "123456",
                 OrdendeServicio = "qwertyu",
                 IdTipoServicio = 1,
-                IdTipoPago = 1, 
+                IdTipoPago = 1,
                 TotalServicio = 10,
                 DistanciaKilometro = 10,
                 Observacion = "qwerty",
@@ -79,7 +75,6 @@ namespace ApiTaxi.Pruebas.Aplicacion.CasosDeUso.Servicio
                 }
             };
 
-            validator.ValidateAsync(comando).Returns(new ValidationResult());
 
             var tipoServicio = new TipoServicio(1);
             var tipopago = new TipoPago(2);
@@ -141,7 +136,6 @@ namespace ApiTaxi.Pruebas.Aplicacion.CasosDeUso.Servicio
 
             var resultado = await casoDeUso.Handle(comando);
 
-            await validator.Received(1).ValidateAsync(comando);
             await repositorio.Received(1).Agregar(Arg.Any<ApiTaxi.Dominio.Entidades.Servicio>());
             await unitOfWork.Received(1).Persistir();
             Assert.AreNotEqual(0, resultado);

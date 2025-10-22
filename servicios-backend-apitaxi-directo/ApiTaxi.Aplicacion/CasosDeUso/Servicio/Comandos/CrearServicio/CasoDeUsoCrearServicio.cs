@@ -1,9 +1,7 @@
 ﻿using ApiTaxi.Aplicacion.Contratos.Persistencia;
 using ApiTaxi.Aplicacion.Contratos.Repositorios;
-using ApiTaxi.Aplicacion.Execpciones;
 using ApiTaxi.Aplicacion.Utilidades.Mediador;
 using ApiTaxi.Dominio.ObjetoValor;
-using FluentValidation;
 
 namespace ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CrearServicio
 {
@@ -11,24 +9,16 @@ namespace ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CrearServicio
     {
         private readonly IRepositorioServicios _Repositorio;
         private readonly IUnitOfWork _UnitOfWork;
-        private readonly IValidator<CmdCrearServicio> _Validator;
 
-        public CasoDeUsoCrearServicio(IRepositorioServicios repositorio, IUnitOfWork unitOfWork, IValidator<CmdCrearServicio> validator)
+        public CasoDeUsoCrearServicio(IRepositorioServicios repositorio, IUnitOfWork unitOfWork)
         {
             _Repositorio = repositorio;
             _UnitOfWork = unitOfWork;
-            _Validator = validator;
         }
-  
+
 
         public async Task<int> Handle(CmdCrearServicio cmd)
         {
-            var resultadoValidacion = await _Validator.ValidateAsync(cmd);
-            if (!resultadoValidacion.IsValid)
-            {
-                throw new ExepcionDeValidacion(resultadoValidacion);
-            }
-
 
             // --- Mapeo: DTOs → Entidades de dominio ---
             var destinosDominio = cmd.Destinos.Select(d => new Dominio.Entidades.Destino(
