@@ -1,4 +1,6 @@
-﻿using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.AnularServicio;
+﻿using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Consultas.ObtenerLogin;
+using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Dtos;
+using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.AnularServicio;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CancelarServicio;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CrearServicio;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerEstados;
@@ -17,6 +19,7 @@ namespace ApiTaxi.Aplicacion
         public static IServiceCollection AgregarServicioDeAplicacion(this IServiceCollection services)
         {
             services.AddTransient<IMediator, MediadorSimple>();
+            services.AddScoped<IRequestHandler<ConsultarValidacionLogin, ValidacionLoginResponseDto>, CasoDeUsoValidacionLogin>();
             services.AddScoped<IRequestHandler<CmdCrearServicio, ServicioDto>, CasoDeUsoCrearServicio>();
             services.AddScoped<IRequestHandler<CmdCancelarServicio, ServicioCancelarResponseDto>, CasoDeUsoCancelarServicio>();
             services.AddScoped<IRequestHandler<CmdAnularServicio, ServicioAnularResponseDto>, CasoDeUsoAnularServicio>();

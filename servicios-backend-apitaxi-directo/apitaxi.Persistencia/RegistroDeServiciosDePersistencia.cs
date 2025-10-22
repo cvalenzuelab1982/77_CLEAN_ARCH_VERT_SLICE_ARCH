@@ -12,6 +12,7 @@ namespace ApiTaxi.Persistencia
         {
             services.AddDbContext<ApitaxiDbContext>(opt => opt.UseSqlServer("name=ApitaxiConnectionString"));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IRepositorioSeguridad, RepositorioSeguridad>();
             services.AddScoped<IRepositorioServicios, RepositorioServicios>();
             services.AddScoped<IRepositorioTarifario, RepositorisTarifario>();
 
