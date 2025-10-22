@@ -1,5 +1,4 @@
-﻿using ApiTaxi.Dominio.Entidades;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ApiTaxi.Persistencia
 {
@@ -25,6 +24,6 @@ namespace ApiTaxi.Persistencia
         }
 
         //Configuracion de tablas, solo si gestionaremos entidades del dominio
-        public DbSet<Servicio> Servicios { get; set; }
+        //public DbSet<Servicio> Servicios { get; set; }
     }
 }

@@ -14,4 +14,8 @@
     <ProjectReference Include="..\ApiTaxi.Aplicacion\ApiTaxi.Aplicacion.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Configuraciones\" />
+  </ItemGroup>
+
 </Project>

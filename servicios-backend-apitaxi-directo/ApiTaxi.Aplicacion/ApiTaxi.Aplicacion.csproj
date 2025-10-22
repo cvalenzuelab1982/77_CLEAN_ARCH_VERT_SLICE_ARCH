@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CasosDeUso\Servicio\Consultas\" />
+    <Folder Include="CasosDeUso\Tarifario\Comandos\" />
   </ItemGroup>
 
 </Project>

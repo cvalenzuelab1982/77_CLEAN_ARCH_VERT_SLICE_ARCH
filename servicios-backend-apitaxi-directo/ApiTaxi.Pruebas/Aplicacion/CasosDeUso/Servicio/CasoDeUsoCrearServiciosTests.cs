@@ -38,9 +38,9 @@ namespace ApiTaxi.Pruebas.Aplicacion.CasosDeUso.Servicio
                 TotalServicio = 10,
                 DistanciaKilometro = 10,
                 Observacion = "qwerty",
-                Destinos = new List<DestinoDto>
+                Destinos = new List<DestinoRequestDto>
                 {
-                    new DestinoDto
+                    new DestinoRequestDto
                     {
                         LatitudOrigen = 1,
                         LongitudOrigen = 1,
@@ -60,9 +60,9 @@ namespace ApiTaxi.Pruebas.Aplicacion.CasosDeUso.Servicio
                         Negociado = true
                     }
                 },
-                Clientes = new List<ClienteDto>
+                Clientes = new List<ClienteRequestDto>
                 {
-                    new ClienteDto
+                    new ClienteRequestDto
                     {
                         TipoDocumentoCliente = 1,
                         NumeroDocumentoCliente = "12345678",

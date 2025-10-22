@@ -16,7 +16,7 @@ namespace ApiTaxi.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("obtener-tarifario")]
+        [HttpPost("obtener")]
         public async Task<IActionResult> ObtenerTarifario([FromBody] TarifarioRequestDto request)
         {
             var consulta = new ConsultaObtenerTarifario

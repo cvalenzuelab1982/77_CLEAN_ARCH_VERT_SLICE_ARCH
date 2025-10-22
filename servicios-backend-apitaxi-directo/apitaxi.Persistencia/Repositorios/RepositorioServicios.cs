@@ -1,10 +1,10 @@
-﻿using ApiTaxi.Aplicacion.Contratos.Repositorios;
-using ApiTaxi.Dominio.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.AnularServicio;
+using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CancelarServicio;
+using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CrearServicio;
+using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerEstados;
+using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerServiciosRealizados;
+using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Dtos;
+using ApiTaxi.Aplicacion.Contratos.Repositorios;
 
 namespace ApiTaxi.Persistencia.Repositorios
 {
@@ -12,30 +12,30 @@ namespace ApiTaxi.Persistencia.Repositorios
     {
         public RepositorioServicios()
         {
-            
+
         }
 
-        public Task Actualizar(Servicio entidad)
+        public Task<ServicioAnularResponseDto> AnularServicio(CmdAnularServicio request)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Servicio> Agregar(Servicio entidad)
+        public Task<ServicioCancelarResponseDto> CancelarServicio(CmdCancelarServicio request)
         {
             throw new NotImplementedException();
         }
 
-        public Task Borrar(Servicio entidad)
+        public Task<EstadoDto> ObtenerEstado(ConsultaObtenerEstados request)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Servicio?> ObtenerPorId(int id)
+        public Task<List<ServicioRealizadoResponseDto>> ObtenerServiciosRealizados(ConsultaObtenerServiciosRealizados request)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Servicio>> Obtenertodos()
+        public Task<ServicioDto> RegistrarServicio(CmdCrearServicio request)
         {
             throw new NotImplementedException();
         }

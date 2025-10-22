@@ -1,4 +1,4 @@
-﻿namespace ApiTaxi.Aplicacion.CasosDeUso.Tarifario.Dtos
+﻿namespace ApiTaxi.Aplicacion.CasosDeUso.Servicio.Dtos
 {
     public class DestinoResponseDto
     {
@@ -13,8 +13,8 @@
         public int Orden { get; set; }
         public decimal DistanciaDestinoKilometro { get; set; }
         public decimal Precio { get; set; }
-        public string? FechaInicio { get; set; }
-        public string? FechaFin { get; set; }
+        public string FechaInicio { get; set; } = null!;
+        public string FechaFin { get; set; } = null!;
         public string ZonaOrigen { get; set; } = null!;
         public string ZonaDestino { get; set; } = null!;
         public bool Negociado { get; set; }

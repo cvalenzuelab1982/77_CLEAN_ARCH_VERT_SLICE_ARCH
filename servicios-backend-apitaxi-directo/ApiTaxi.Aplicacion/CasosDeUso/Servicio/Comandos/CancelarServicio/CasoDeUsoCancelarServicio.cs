@@ -3,31 +3,26 @@ using ApiTaxi.Aplicacion.Contratos.Repositorios;
 using ApiTaxi.Aplicacion.Execpciones;
 using ApiTaxi.Aplicacion.Utilidades.Mediador;
 
-namespace ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CrearServicio
+namespace ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CancelarServicio
 {
-    public class CasoDeUsoCrearServicio : IRequestHandler<CmdCrearServicio, ServicioDto>
+    public class CasoDeUsoCancelarServicio : IRequestHandler<CmdCancelarServicio, ServicioCancelarResponseDto>
     {
         private readonly IRepositorioServicios _Repositorio;
 
-        public CasoDeUsoCrearServicio(IRepositorioServicios repositorio)
+        public CasoDeUsoCancelarServicio(IRepositorioServicios repositorio)
         {
             _Repositorio = repositorio;
         }
 
-
-        public async Task<ServicioDto> Handle(CmdCrearServicio request)
+        public async Task<ServicioCancelarResponseDto> Handle(CmdCancelarServicio request)
         {
-
-            var servicio = await _Repositorio.RegistrarServicio(request);
+            var servicio = await _Repositorio.CancelarServicio(request);
             if (servicio is null)
             {
                 throw new ExcepcionNoEncontrado();
             }
 
             return servicio;
-
         }
-
-
     }
 }
