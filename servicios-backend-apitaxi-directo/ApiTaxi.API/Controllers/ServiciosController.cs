@@ -3,6 +3,7 @@ using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.AnularServicio;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CancelarServicio;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CrearServicio;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerEstados;
+using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerServicioInformacion;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerServiciosRealizados;
 using ApiTaxi.Aplicacion.Utilidades.Mediador;
 using Microsoft.AspNetCore.Mvc;
@@ -114,6 +115,18 @@ namespace ApiTaxi.API.Controllers
                 TipoDocumentoCliente = request.TipoDocumentoCliente,
                 NumeroDocumentoCliente = request.NumeroDocumentoCliente,
                 Ruc = request.Ruc
+            };
+
+            var resultado = await _mediator.Send(consulta);
+            return Ok(resultado);
+        }
+
+        [HttpGet("informacion/{idServicio}")]
+        public async Task<IActionResult> ServicioInformacion(int idServicio)
+        {
+            var consulta = new ConsultaObtenerServicioInformacion
+            {
+                IdServicio = idServicio
             };
 
             var resultado = await _mediator.Send(consulta);

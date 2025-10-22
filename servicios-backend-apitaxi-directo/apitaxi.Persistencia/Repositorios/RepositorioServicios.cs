@@ -2,6 +2,7 @@
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CancelarServicio;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CrearServicio;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerEstados;
+using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerServicioInformacion;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerServiciosRealizados;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Dtos;
 using ApiTaxi.Aplicacion.Contratos.Repositorios;
@@ -26,6 +27,11 @@ namespace ApiTaxi.Persistencia.Repositorios
         }
 
         public Task<EstadoDto> ObtenerEstado(ConsultaObtenerEstados request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ServicioInformacionResponseDto> ObtenerServicioInformacion(ConsultaObtenerServicioInformacion request)
         {
             throw new NotImplementedException();
         }

@@ -2,6 +2,7 @@
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CancelarServicio;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CrearServicio;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerEstados;
+using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerServicioInformacion;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerServiciosRealizados;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Dtos;
 using ApiTaxi.Aplicacion.CasosDeUso.Tarifario.Consultas.ObtenerTarifario;
@@ -22,6 +23,7 @@ namespace ApiTaxi.Aplicacion
             services.AddScoped<IRequestHandler<ConsultaObtenerTarifario, TarifarioDto>, CasoDeUsoObtenerTarifario>();
             services.AddScoped<IRequestHandler<ConsultaObtenerEstados, EstadoDto>, CasoDeUsoObtenerEstados>();
             services.AddScoped<IRequestHandler<ConsultaObtenerServiciosRealizados, List<ServicioRealizadoResponseDto>>, CasoDeUsoObtenerServiciosRealizados>();
+            services.AddScoped<IRequestHandler<ConsultaObtenerServicioInformacion, ServicioInformacionResponseDto>, CasoDeUsoObtenerServicioInformacion>();
             return services;
         }
     }
