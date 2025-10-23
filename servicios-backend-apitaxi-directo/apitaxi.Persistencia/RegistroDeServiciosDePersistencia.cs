@@ -25,7 +25,7 @@ namespace ApiTaxi.Persistencia
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IEncripta, Encripta>();
             services.AddSingleton<INetworkHelper, NetworkHelper>();
-            services.AddSingleton<IVersionServicio, VersionServicio>();
+            services.AddSingleton<ISistemaServicio, SistemaServicio>();
             services.AddScoped<IRepositorioSeguridad, RepositorioSeguridad>();
             services.AddScoped<IRepositorioServicios, RepositorioServicios>();
             services.AddScoped<IRepositorioTarifario, RepositorisTarifario>();

@@ -1,7 +1,8 @@
 ﻿namespace ApiTaxi.Persistencia.Servicios.Sistema
 {
-    public interface IVersionServicio
+    public interface ISistemaServicio
     {
         string ObtenerVersion();
+        DateTime ObtenerFechaHoraLima();
     }
 }

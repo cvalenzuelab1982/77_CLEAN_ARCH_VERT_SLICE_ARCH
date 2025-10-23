@@ -17,14 +17,14 @@ namespace ApiTaxi.Persistencia.Repositorios
     {
         private readonly IEncripta _encripta;
         private readonly INetworkHelper _networkHelper;
-        private readonly IVersionServicio _versionServicio;
+        private readonly ISistemaServicio _sistemaServicio;
         private readonly string _connectionString;
 
-        public RepositorioSeguridad(IEncripta encripta, INetworkHelper networkHelper, IVersionServicio versionServicio, IConfiguration configuration, IContextoUsuarioActual contextoUsuario)
+        public RepositorioSeguridad(IEncripta encripta, INetworkHelper networkHelper, ISistemaServicio sistemaServicio, IConfiguration configuration, IContextoUsuarioActual contextoUsuario)
         {
             _encripta = encripta;
             _networkHelper = networkHelper;
-            _versionServicio = versionServicio;
+            _sistemaServicio = sistemaServicio;
             _connectionString = configuration.GetConnectionString("ApitaxiConnectionString") ?? throw new ArgumentNullException("Conexion no encontrada");
         }
 
@@ -33,7 +33,7 @@ namespace ApiTaxi.Persistencia.Repositorios
             var pass = _encripta.Encriptar(request.Password);
             var host = _networkHelper.GetFQDN();
             var ip = _networkHelper.GetLocalIPv4(NetworkInterfaceType.Ethernet) ?? "0.0.0.0";
-            var version = _versionServicio.ObtenerVersion();
+            var version = _sistemaServicio.ObtenerVersion();
 
             using SqlConnection cn = new SqlConnection(_connectionString);
             using SqlCommand cmd = new SqlCommand("X12_SEG_Usuario_Login", cn)
@@ -52,13 +52,44 @@ namespace ApiTaxi.Persistencia.Repositorios
             using var reader = await cmd.ExecuteReaderAsync();
             var resultado = new ValidacionLoginResponseDto();
 
+            /*
+             NE --Usuario no existe
+             BA --Usuario de Baja
+             BL --Usuario Bloqueado
+             IN --Autenticacion no valida
+             VALID - Autenticacion Correcta
+             */
+
             if (await reader.ReadAsync())
             {
                 resultado.Estado = reader["Estado"].ToString()?? string.Empty;
                 resultado.IdUsuario = reader["IdUsuario"].ToString() ?? string.Empty;
+
+                //CONSULTAR SI EN EL SP DE LOGIN ENVIA DATOS PARA SU PROPIA AUDITORIA
+                await LogInicioSesion(resultado, host, ip, version);
             }
 
             return resultado;
+        }
+
+        private async Task LogInicioSesion(ValidacionLoginResponseDto request, string host, string ip, string version)
+        {
+            var fecha = _sistemaServicio.ObtenerFechaHoraLima();
+
+            using SqlConnection cn = new SqlConnection(_connectionString);
+            using SqlCommand cmd = new SqlCommand("loginiciosesiones", cn)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.Add(new SqlParameter("@IdUsuario", SqlDbType.VarChar, 80) { Value = request.IdUsuario ?? (object)DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@Estado", SqlDbType.VarChar, 10) { Value = request.Estado ?? (object)DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@FechaInicioSesion", SqlDbType.DateTime) { Value = fecha });
+            cmd.Parameters.Add(new SqlParameter("@IpAddress", SqlDbType.VarChar, 40) { Value = ip ?? (object)DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@Host", SqlDbType.VarChar, 50) { Value = host ?? (object)DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@VersionApp", SqlDbType.VarChar, 40) { Value = version ?? (object)DBNull.Value });
+            await cn.OpenAsync();
+            await cmd.ExecuteNonQueryAsync();
         }
     }
 }

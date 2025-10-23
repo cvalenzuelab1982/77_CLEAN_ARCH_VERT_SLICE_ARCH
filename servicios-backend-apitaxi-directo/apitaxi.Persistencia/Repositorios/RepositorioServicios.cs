@@ -21,11 +21,15 @@ namespace ApiTaxi.Persistencia.Repositorios
 
         public Task<ServicioAnularResponseDto> AnularServicio(CmdAnularServicio request)
         {
+            var usuarioIdAuditoria = int.TryParse(_contextoUsuario.IdUsuario, out int id) ? id : (object)DBNull.Value;
+
             throw new NotImplementedException();
         }
 
         public Task<ServicioCancelarResponseDto> CancelarServicio(CmdCancelarServicio request)
         {
+            var usuarioIdAuditoria = int.TryParse(_contextoUsuario.IdUsuario, out int id) ? id : (object)DBNull.Value;
+
             throw new NotImplementedException();
         }
 
