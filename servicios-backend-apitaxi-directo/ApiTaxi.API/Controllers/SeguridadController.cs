@@ -1,5 +1,5 @@
 ﻿using ApiTaxi.API.DTOs.Segurirdad;
-using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Consultas.ObtenerLogin;
+using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Comandos.ObtenerLogin;
 using ApiTaxi.Aplicacion.Utilidades.Mediador;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +19,7 @@ namespace ApiTaxi.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Autenticar(ValidacionLoginRequestDto request)
         {
-            var consulta = new ConsultarValidacionLogin
+            var consulta = new CmdValidacionLogin
             {
                 Usuario = request.Usuario,
                 Password = request.Password,

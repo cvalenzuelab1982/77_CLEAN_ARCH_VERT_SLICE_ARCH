@@ -1,12 +1,14 @@
 ﻿using ApiTaxi.API.DTOs.Tarifarios;
 using ApiTaxi.Aplicacion.CasosDeUso.Tarifario.Consultas.ObtenerTarifario;
 using ApiTaxi.Aplicacion.Utilidades.Mediador;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/v1/tarifario")]
+    [Authorize]
     public class TarifariosController : ControllerBase
     {
         private readonly IMediator _mediator;

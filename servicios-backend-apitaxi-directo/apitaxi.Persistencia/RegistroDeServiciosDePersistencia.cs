@@ -8,6 +8,8 @@ using ApiTaxi.Persistencia.Servicios.Seguridad;
 using ApiTaxi.Persistence.Servicios.Seguridad;
 using ApiTaxi.Persistencia.Servicios.Red;
 using ApiTaxi.Persistencia.Servicios.Sistema;
+using ApiTaxi.Aplicacion.Contratos.Token;
+using ApiTaxi.Persistencia.Servicios.Token;
 
 namespace ApiTaxi.Persistencia
 {
@@ -16,6 +18,7 @@ namespace ApiTaxi.Persistencia
         public static IServiceCollection AgregarServicioDePersistencia(this IServiceCollection services)
         {
             services.AddDbContext<ApitaxiDbContext>(opt => opt.UseSqlServer("name=ApitaxiConnectionString"));
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IEncripta, Encripta>();
             services.AddSingleton<INetworkHelper, NetworkHelper>();

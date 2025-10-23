@@ -6,12 +6,14 @@ using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerEstados;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerServicioInformacion;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerServiciosRealizados;
 using ApiTaxi.Aplicacion.Utilidades.Mediador;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/v1/servicio")]
+    [Authorize]
     public class ServiciosController : ControllerBase
     {
         private readonly IMediator _mediator;

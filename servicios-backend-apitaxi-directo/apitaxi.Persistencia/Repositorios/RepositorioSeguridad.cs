@@ -1,15 +1,12 @@
-﻿using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Consultas.ObtenerLogin;
-using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Dtos;
+﻿using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Comandos.ObtenerLogin;
 using ApiTaxi.Aplicacion.Contratos.Repositorios;
 using ApiTaxi.Persistencia.Servicios.Red;
 using ApiTaxi.Persistencia.Servicios.Seguridad;
 using ApiTaxi.Persistencia.Servicios.Sistema;
 using Microsoft.Data.SqlClient;
-using System.Net.NetworkInformation;
 using Microsoft.Extensions.Configuration;
-using static System.Net.Mime.MediaTypeNames;
 using System.Data;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Net.NetworkInformation;
 
 
 namespace ApiTaxi.Persistencia.Repositorios
@@ -29,7 +26,7 @@ namespace ApiTaxi.Persistencia.Repositorios
             _connectionString = configuration.GetConnectionString("ApitaxiConnectionString") ?? throw new ArgumentNullException("Conexion no encontrada");
         }
 
-        public async Task<ValidacionLoginResponseDto> Autenticar(ConsultarValidacionLogin request)
+        public async Task<string> Autenticar(CmdValidacionLogin request)
         {
             var pass = _encripta.Encriptar(request.Password);
             var host = _networkHelper.GetFQDN();
@@ -50,16 +47,14 @@ namespace ApiTaxi.Persistencia.Repositorios
             cmd.Parameters.Add(new SqlParameter("@VersionApp", SqlDbType.VarChar, 40) { Value = version });
 
             await cn.OpenAsync();
-
             using var reader = await cmd.ExecuteReaderAsync();
 
             if (await reader.ReadAsync())
             {
-                string estado = reader.GetString(0);
-                return new ValidacionLoginResponseDto { EsValido = estado.Equals("OK", StringComparison.OrdinalIgnoreCase) };
+                return reader.GetString(0);
             }
 
-            return new ValidacionLoginResponseDto { EsValido = false };
+            return string.Empty;
         }
     }
 }

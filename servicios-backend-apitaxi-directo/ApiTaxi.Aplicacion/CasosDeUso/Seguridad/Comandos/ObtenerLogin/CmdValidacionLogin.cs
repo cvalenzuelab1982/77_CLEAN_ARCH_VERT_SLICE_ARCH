@@ -1,9 +1,9 @@
 ﻿using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Dtos;
 using ApiTaxi.Aplicacion.Utilidades.Mediador;
 
-namespace ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Consultas.ObtenerLogin
+namespace ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Comandos.ObtenerLogin
 {
-    public class ConsultarValidacionLogin : IRequest<ValidacionLoginResponseDto>
+    public class CmdValidacionLogin : IRequest<TokenResponseDto>
     {
         public required string Usuario { get; set; }
         public required string Password { get; set; }
