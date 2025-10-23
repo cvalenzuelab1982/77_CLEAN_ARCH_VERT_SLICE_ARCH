@@ -5,6 +5,6 @@ namespace ApiTaxi.Aplicacion.Contratos.Repositorios
 {
     public interface IRepositorioSeguridad
     {
-        Task<string> Autenticar(CmdValidacionLogin request);
+        Task<ValidacionLoginResponseDto> Autenticar(CmdValidacionLogin request);
     }
 }

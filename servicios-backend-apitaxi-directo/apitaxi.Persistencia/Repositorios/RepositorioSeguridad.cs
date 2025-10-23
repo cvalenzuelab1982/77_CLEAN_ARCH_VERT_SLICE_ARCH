@@ -1,5 +1,7 @@
 ﻿using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Comandos.ObtenerLogin;
+using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Dtos;
 using ApiTaxi.Aplicacion.Contratos.Repositorios;
+using ApiTaxi.Persistencia.Servicios.Auditoria;
 using ApiTaxi.Persistencia.Servicios.Red;
 using ApiTaxi.Persistencia.Servicios.Seguridad;
 using ApiTaxi.Persistencia.Servicios.Sistema;
@@ -18,7 +20,7 @@ namespace ApiTaxi.Persistencia.Repositorios
         private readonly IVersionServicio _versionServicio;
         private readonly string _connectionString;
 
-        public RepositorioSeguridad(IEncripta encripta, INetworkHelper networkHelper, IVersionServicio versionServicio, IConfiguration configuration)
+        public RepositorioSeguridad(IEncripta encripta, INetworkHelper networkHelper, IVersionServicio versionServicio, IConfiguration configuration, IContextoUsuarioActual contextoUsuario)
         {
             _encripta = encripta;
             _networkHelper = networkHelper;
@@ -26,7 +28,7 @@ namespace ApiTaxi.Persistencia.Repositorios
             _connectionString = configuration.GetConnectionString("ApitaxiConnectionString") ?? throw new ArgumentNullException("Conexion no encontrada");
         }
 
-        public async Task<string> Autenticar(CmdValidacionLogin request)
+        public async Task<ValidacionLoginResponseDto> Autenticar(CmdValidacionLogin request)
         {
             var pass = _encripta.Encriptar(request.Password);
             var host = _networkHelper.GetFQDN();
@@ -48,13 +50,15 @@ namespace ApiTaxi.Persistencia.Repositorios
 
             await cn.OpenAsync();
             using var reader = await cmd.ExecuteReaderAsync();
+            var resultado = new ValidacionLoginResponseDto();
 
             if (await reader.ReadAsync())
             {
-                return reader.GetString(0);
+                resultado.Estado = reader["Estado"].ToString()?? string.Empty;
+                resultado.IdUsuario = reader["IdUsuario"].ToString() ?? string.Empty;
             }
 
-            return string.Empty;
+            return resultado;
         }
     }
 }

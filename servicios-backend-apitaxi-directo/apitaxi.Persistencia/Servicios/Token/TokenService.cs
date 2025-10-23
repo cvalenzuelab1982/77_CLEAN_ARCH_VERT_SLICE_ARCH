@@ -18,11 +18,12 @@ namespace ApiTaxi.Persistencia.Servicios.Token
             _jwtIssuer = configuration["Jwt:Issuer"] ?? "ApiTaxi";
         }
 
-        public string GenerarToken(string usuario)
+        public string GenerarToken(string usuario, string usuarioId)
         {
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, usuario),
+                new Claim(ClaimTypes.NameIdentifier, usuarioId),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

@@ -18,10 +18,10 @@ namespace ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Comandos.ObtenerLogin
 
         public async Task<TokenResponseDto> Handle(CmdValidacionLogin request)
         {
-            var estado = await _repositorio.Autenticar(request);
-            if (estado == "VALID")
+            var resultado = await _repositorio.Autenticar(request);
+            if (resultado.Estado == "VALID")
             {
-                string token = _tokenService.GenerarToken(request.Usuario);
+                string token = _tokenService.GenerarToken(request.Usuario, resultado.IdUsuario);
                 return new TokenResponseDto
                 {
                     Autenticado = true,

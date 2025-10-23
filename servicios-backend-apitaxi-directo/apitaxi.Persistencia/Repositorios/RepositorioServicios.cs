@@ -6,14 +6,17 @@ using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerServicioInformacio
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Consultas.ObtenerServiciosRealizados;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Dtos;
 using ApiTaxi.Aplicacion.Contratos.Repositorios;
+using ApiTaxi.Persistencia.Servicios.Auditoria;
 
 namespace ApiTaxi.Persistencia.Repositorios
 {
     public class RepositorioServicios : IRepositorioServicios
     {
-        public RepositorioServicios()
-        {
+        private readonly IContextoUsuarioActual _contextoUsuario;
 
+        public RepositorioServicios(IContextoUsuarioActual contextoUsuario)
+        {
+            _contextoUsuario = contextoUsuario;
         }
 
         public Task<ServicioAnularResponseDto> AnularServicio(CmdAnularServicio request)
@@ -43,6 +46,8 @@ namespace ApiTaxi.Persistencia.Repositorios
 
         public Task<ServicioDto> RegistrarServicio(CmdCrearServicio request)
         {
+            var usuarioIdAuditoria = int.TryParse(_contextoUsuario.IdUsuario, out int id) ? id : (object)DBNull.Value;
+
             throw new NotImplementedException();
         }
     }

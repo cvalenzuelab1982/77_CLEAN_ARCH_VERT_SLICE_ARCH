@@ -10,6 +10,7 @@ using ApiTaxi.Persistencia.Servicios.Red;
 using ApiTaxi.Persistencia.Servicios.Sistema;
 using ApiTaxi.Aplicacion.Contratos.Token;
 using ApiTaxi.Persistencia.Servicios.Token;
+using ApiTaxi.Persistencia.Servicios.Auditoria;
 
 namespace ApiTaxi.Persistencia
 {
@@ -18,7 +19,9 @@ namespace ApiTaxi.Persistencia
         public static IServiceCollection AgregarServicioDePersistencia(this IServiceCollection services)
         {
             services.AddDbContext<ApitaxiDbContext>(opt => opt.UseSqlServer("name=ApitaxiConnectionString"));
+            services.AddHttpContextAccessor();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IContextoUsuarioActual, ContextoUsuarioActual>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IEncripta, Encripta>();
             services.AddSingleton<INetworkHelper, NetworkHelper>();
