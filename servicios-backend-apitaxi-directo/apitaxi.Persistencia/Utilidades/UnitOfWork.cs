@@ -1,6 +1,6 @@
 ﻿using ApiTaxi.Aplicacion.Contratos.Persistencia;
 
-namespace ApiTaxi.Persistencia
+namespace ApiTaxi.Persistencia.Utilidades
 {
     public class UnitOfWork : IUnitOfWork
     {
