@@ -3,6 +3,5 @@
     public interface IVersionServicio
     {
         string ObtenerVersion();
-
     }
 }
