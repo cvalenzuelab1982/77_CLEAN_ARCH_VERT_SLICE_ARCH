@@ -21,12 +21,14 @@ namespace ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Comandos.ObtenerLogin
             var resultado = await _repositorio.Autenticar(request);
             if (resultado.Estado == "VALID")
             {
-                string token = _tokenService.GenerarToken(request.Usuario, resultado.IdUsuario);
+                var (token, expiresIn) = _tokenService.GenerarToken(request.Usuario, resultado.IdUsuario);
                 return new TokenResponseDto
                 {
                     Autenticado = true,
                     Token = token,
-                    Mensaje = "Autenticación exitosa."
+                    Mensaje = "Autenticación exitosa.",
+                    TokenType = "Bearer",
+                    ExpiresIn = expiresIn,
                 };
             }
 

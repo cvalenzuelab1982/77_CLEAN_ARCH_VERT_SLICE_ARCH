@@ -18,7 +18,7 @@ namespace ApiTaxi.Persistencia.Servicios.Token
             _jwtIssuer = configuration["Jwt:Issuer"] ?? "ApiTaxi";
         }
 
-        public string GenerarToken(string usuario, string usuarioId)
+        public (string Token, int ExpiresIn) GenerarToken(string usuario, string usuarioId)
         {
             var claims = new[]
             {
@@ -29,16 +29,18 @@ namespace ApiTaxi.Persistencia.Servicios.Token
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var expiration = DateTime.UtcNow.AddHours(2);
 
             var token = new JwtSecurityToken(
                 issuer: _jwtIssuer,
                 audience: _jwtIssuer,
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(2),
+                expires: expiration,
                 signingCredentials: creds
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return (new JwtSecurityTokenHandler().WriteToken(token), (int)(expiration - DateTime.UtcNow).TotalSeconds);
+;
         }
     }
 }
