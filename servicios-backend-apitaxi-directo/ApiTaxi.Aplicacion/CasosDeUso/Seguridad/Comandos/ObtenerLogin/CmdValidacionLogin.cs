@@ -7,6 +7,6 @@ namespace ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Comandos.ObtenerLogin
     {
         public required string Usuario { get; set; }
         public required string Password { get; set; }
-        public required int Aplicacion { get; set; }
+        public required string grant_type { get; set; }
     }
 }

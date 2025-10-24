@@ -1,4 +1,6 @@
-﻿using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Comandos.ObtenerLogin;
+﻿using ApiTaxi.Aplicacion.CasosDeUso.Externo.KMMP.Consultas.ObtenerEstadosPush;
+using ApiTaxi.Aplicacion.CasosDeUso.Externo.KMMP.Dtos;
+using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Comandos.ObtenerLogin;
 using ApiTaxi.Aplicacion.CasosDeUso.Seguridad.Dtos;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.AnularServicio;
 using ApiTaxi.Aplicacion.CasosDeUso.Servicio.Comandos.CancelarServicio;
@@ -27,6 +29,7 @@ namespace ApiTaxi.Aplicacion
             services.AddScoped<IRequestHandler<ConsultaObtenerEstados, EstadoDto>, CasoDeUsoObtenerEstados>();
             services.AddScoped<IRequestHandler<ConsultaObtenerServiciosRealizados, List<ServicioRealizadoResponseDto>>, CasoDeUsoObtenerServiciosRealizados>();
             services.AddScoped<IRequestHandler<ConsultaObtenerServicioInformacion, ServicioInformacionResponseDto>, CasoDeUsoObtenerServicioInformacion>();
+            services.AddScoped<IRequestHandler<ConsultaObtenerEstadosPush, KmmpEstadosResponseDto>, CasoDeUsoObtenerEstadosPush>();
             return services;
         }
     }

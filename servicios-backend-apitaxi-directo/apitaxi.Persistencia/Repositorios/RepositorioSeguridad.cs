@@ -43,7 +43,7 @@ namespace ApiTaxi.Persistencia.Repositorios
 
             cmd.Parameters.Add(new SqlParameter("@Usuario", SqlDbType.VarChar, 80) { Value = request.Usuario });
             cmd.Parameters.Add(new SqlParameter("@Password", SqlDbType.VarChar, 100) { Value = pass });
-            cmd.Parameters.Add(new SqlParameter("@Aplicacion", SqlDbType.Int) { Value = request.Aplicacion });
+            cmd.Parameters.Add(new SqlParameter("@Aplicacion", SqlDbType.Int) { Value = 1 }); //es aplicacion(int) o grant_type(varchar)
             cmd.Parameters.Add(new SqlParameter("@Host", SqlDbType.VarChar, 20) { Value = host });
             cmd.Parameters.Add(new SqlParameter("@IpAddress", SqlDbType.VarChar, 40) { Value = ip });
             cmd.Parameters.Add(new SqlParameter("@VersionApp", SqlDbType.VarChar, 40) { Value = version });
@@ -66,7 +66,7 @@ namespace ApiTaxi.Persistencia.Repositorios
                 resultado.IdUsuario = reader["IdUsuario"].ToString() ?? string.Empty;
 
                 //CONSULTAR SI EN EL SP DE LOGIN ENVIA DATOS PARA SU PROPIA AUDITORIA
-                await LogInicioSesion(resultado, host, ip, version);
+                //await LogInicioSesion(resultado, host, ip, version);
             }
 
             return resultado;

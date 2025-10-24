@@ -23,7 +23,7 @@ namespace ApiTaxi.API.Controllers
             {
                 Usuario = request.Usuario,
                 Password = request.Password,
-                Aplicacion = request.Aplicacion
+                grant_type = request.grant_type
             };
 
             var resultado = await _mediator.Send(consulta);

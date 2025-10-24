@@ -29,6 +29,7 @@ namespace ApiTaxi.Persistencia
             services.AddScoped<IRepositorioSeguridad, RepositorioSeguridad>();
             services.AddScoped<IRepositorioServicios, RepositorioServicios>();
             services.AddScoped<IRepositorioTarifario, RepositorisTarifario>();
+            services.AddHttpClient<IRepositorioKMMPServicio, RepositorioKMMPServicio>();
 
             return services;
         }

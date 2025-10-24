@@ -11,6 +11,6 @@ namespace ApiTaxi.API.DTOs.Segurirdad
         public string Password { get; set; } = null!;
 
         [Required]
-        public int Aplicacion { get; set; }
+        public string grant_type { get; set; } = null!;
     }
 }
