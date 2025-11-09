@@ -17,6 +17,7 @@ namespace AutoAlquila.Infraestructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //APLICAR AUTOMATICAMENTE LA CONFIGURACIONES A LAS ENTIDADADES CON LA TABLAS
+            //CON ESTO YA NO ES NECESARIO DECLARA  public DbSet<PruebaEntity> Prueba { get; set; }
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
