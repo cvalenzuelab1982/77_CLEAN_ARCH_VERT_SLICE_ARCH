@@ -1,9 +1,15 @@
 ﻿using AutoAlquila.Domain.Abstractions;
+using AutoAlquila.Domain.Shared;
 
 namespace AutoAlquila.Domain.Vehiculos
 {
     public sealed class Vehiculo : Entity
     {
+        private Vehiculo()
+        {
+            
+        }
+
         public Vehiculo(
             Guid id, 
             Modelo modelo, 

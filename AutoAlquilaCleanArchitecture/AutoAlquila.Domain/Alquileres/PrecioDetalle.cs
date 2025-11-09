@@ -1,4 +1,4 @@
-﻿using AutoAlquila.Domain.Vehiculos;
+﻿using AutoAlquila.Domain.Shared;
 
 namespace AutoAlquila.Domain.Alquileres
 {

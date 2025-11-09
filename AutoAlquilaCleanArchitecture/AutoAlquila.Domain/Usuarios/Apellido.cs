@@ -1,4 +1,4 @@
 ﻿namespace AutoAlquila.Domain.Usuarios
 {
-    public class Apellido(string Value);
+    public record Apellido(string Value);
 }

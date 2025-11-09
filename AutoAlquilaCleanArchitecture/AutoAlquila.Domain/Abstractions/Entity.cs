@@ -1,10 +1,17 @@
-﻿namespace AutoAlquila.Domain.Abstractions
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AutoAlquila.Domain.Abstractions
 {
     public abstract class Entity
     {
         private readonly List<IDomainEvent> _domainEvent = new();
 
         public Guid Id { get; init; }
+
+        protected Entity()
+        {
+            
+        }
 
         protected Entity(Guid id)
         {

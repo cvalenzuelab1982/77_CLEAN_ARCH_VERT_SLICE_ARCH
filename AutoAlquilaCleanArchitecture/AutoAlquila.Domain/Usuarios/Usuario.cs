@@ -5,6 +5,11 @@ namespace AutoAlquila.Domain.Usuarios
 {
     public sealed class Usuario : Entity
     {
+        private Usuario()
+        {
+            
+        }
+
         private Usuario(Guid id, Nombre nombre, Apellido apellido, Email email) : base(id)
         {
             Nombre = nombre;

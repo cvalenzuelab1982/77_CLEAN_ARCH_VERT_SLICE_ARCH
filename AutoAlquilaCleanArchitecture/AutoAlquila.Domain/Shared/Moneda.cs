@@ -1,4 +1,4 @@
-﻿namespace AutoAlquila.Domain.Vehiculos
+﻿namespace AutoAlquila.Domain.Shared
 {
     public record Moneda(decimal Monto, TipoMoneda tipoMoneda)
     {

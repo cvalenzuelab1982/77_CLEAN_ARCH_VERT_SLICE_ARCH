@@ -1,0 +1,6 @@
+@AutoAlquila.Api_HostAddress = http://localhost:5049
+
+GET {{AutoAlquila.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

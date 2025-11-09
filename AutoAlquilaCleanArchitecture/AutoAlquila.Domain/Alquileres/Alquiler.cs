@@ -1,5 +1,6 @@
 ﻿using AutoAlquila.Domain.Abstractions;
 using AutoAlquila.Domain.Alquileres.Events;
+using AutoAlquila.Domain.Shared;
 using AutoAlquila.Domain.Vehiculos;
 
 namespace AutoAlquila.Domain.Alquileres
@@ -7,7 +8,7 @@ namespace AutoAlquila.Domain.Alquileres
     public sealed class Alquiler : Entity
     {
         public AlquilerStatus Status { get; private set; }
-        public RangoFechas Duracion { get; private set; }
+        public RangoFechas? Duracion { get; private set; }
         public Guid VehiculoId { get; private set; }
         public Guid UsuarioId { get; private set; }
         public Moneda? PrecioPorPeriodo { get; private set; }
@@ -19,6 +20,11 @@ namespace AutoAlquila.Domain.Alquileres
         public DateTime? FechaDenegacion { get; private set; }
         public DateTime? FechaCompletado { get; private set; }
         public DateTime? FechaCancelacion { get; private set; }
+
+        private Alquiler()
+        {
+            
+        }
 
         private Alquiler(Guid id, Guid vehiculoId, Guid usuarioId, RangoFechas duracion, Moneda? precioPorPeriodo, Moneda? mantenimiento, Moneda? accesorios,
             Moneda? precioTotal, AlquilerStatus status, DateTime? fechaCreacion) : base(id)
@@ -101,6 +107,20 @@ namespace AutoAlquila.Domain.Alquileres
             Status = AlquilerStatus.Cancelado;
             FechaDenegacion = utcNow;
             RaiseDomainEvent(new AlquilerCanceladoDomainEvent(Id));
+
+            return Result.Success();
+        }
+
+        public Result Completar(DateTime utcNow)
+        {
+            if (Status != AlquilerStatus.Confirmado)
+            {
+                return Result.Failure(AlquilerErrors.NotConfirmed);
+            }
+
+            Status = AlquilerStatus.Completado;
+            FechaCompletado = utcNow;
+            RaiseDomainEvent(new AlquilerCompletadoDomainEvent(Id));
 
             return Result.Success();
         }
