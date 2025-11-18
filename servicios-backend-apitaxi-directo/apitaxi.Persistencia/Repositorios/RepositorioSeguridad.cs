@@ -66,7 +66,7 @@ namespace ApiTaxi.Persistencia.Repositorios
                 resultado.IdUsuario = reader["IdUsuario"].ToString() ?? string.Empty;
 
                 //CONSULTAR SI EN EL SP DE LOGIN ENVIA DATOS PARA SU PROPIA AUDITORIA
-                //await LogInicioSesion(resultado, host, ip, version);
+                //await LogInicioSesion(resultado, host, ip, version);  <=============================
             }
 
             return resultado;

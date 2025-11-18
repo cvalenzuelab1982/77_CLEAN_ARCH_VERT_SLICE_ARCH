@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CasosDeUso\Externo\KMMP\Comandos\" />
     <Folder Include="CasosDeUso\Seguridad\Consultas\" />
     <Folder Include="CasosDeUso\Tarifario\Comandos\" />
   </ItemGroup>
